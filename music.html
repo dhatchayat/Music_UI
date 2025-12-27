@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Spotify Style Music Player</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #121212;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.player {
+    width: 380px;
+    background-color: #181818;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h2 {
+    font-size: 20px;
+}
+
+.header p {
+    font-size: 13px;
+    color: #b3b3b3;
+}
+
+/* Album */
+.album {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.album img {
+    width: 220px;
+    height: 220px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.album h3 {
+    font-size: 18px;
+}
+
+.album p {
+    font-size: 14px;
+    color: #b3b3b3;
+}
+
+/* Progress bar */
+.progress {
+    margin: 15px 0;
+}
+
+.bar {
+    height: 5px;
+    background-color: #333;
+    border-radius: 10px;
+}
+
+.fill {
+    width: 0%;
+    height: 100%;
+    background-color: #1db954;
+    border-radius: 10px;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.control-btn {
+    font-size: 22px;
+    cursor: pointer;
+    color: #b3b3b3;
+}
+
+.play {
+    background-color: #1db954;
+    color: black;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+/* Playlist */
+.playlist {
+    margin-top: 25px;
+}
+
+.song {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.song:hover {
+    background-color: #282828;
+}
+
+.song h4 {
+    font-size: 14px;
+}
+
+.song p {
+    font-size: 12px;
+    color: #b3b3b3;
+}
+
+.time {
+    font-size: 12px;
+    color: #b3b3b3;
+}
+
+footer {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 12px;
+    color: #777;
+}
+</style>
+</head>
+
+<body>
+
+<div class="player">
+
+    <div class="header">
+        <h2>Spotify Player</h2>
+        <p>HTML, CSS & JS Mini Project</p>
+    </div>
+
+    <div class="album">
+        <img src="https://i.imgur.com/8Km9tLL.jpg" alt="Album Cover">
+        <h3>Song 1</h3>
+        <p>Harris Jayaraj</p>
+    </div>
+
+    <!-- AUDIO FILE -->
+    <audio id="audio">
+        <!-- Replace with your own mp3 file -->
+        <source src="Slow_Dance.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="progress">
+        <div class="bar">
+            <div class="fill" id="progressFill"></div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <div class="control-btn">⏮</div>
+        <div class="play" id="playBtn">▶</div>
+        <div class="control-btn">⏭</div>
+    </div>
+
+    <div class="playlist">
+        <div class="song">
+            <div>
+                <h4>Be Mine</h4>
+                <p>Jimin</p>
+            </div>
+            <div class="time">5:32</div>
+        </div>
+
+        <div class="song">
+            <div>
+                <h4>Closer Than This</h4>
+                <p>Jimin</p>
+            </div>
+            <div class="time">4:41</div>
+        </div>
+
+        <div class="song">
+            <div>
+                <h4>Slow Dance</h4>
+                <p>Jimin</p>
+            </div>
+            <div class="time">4:10</div>
+        </div>
+    </div>
+
+    <footer>
+        Created for College UI Competition
+    </footer>
+
+</div>
+
+<script>
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("playBtn");
+const progressFill = document.getElementById("progressFill");
+
+playBtn.onclick = () => {
+    if (audio.paused) {
+        audio.play();
+        playBtn.textContent = "⏸";
+    } else {
+        audio.pause();
+        playBtn.textContent = "▶";
+    }
+};
+
+audio.ontimeupdate = () => {
+    const percent = (audio.currentTime / audio.duration) * 100;
+    progressFill.style.width = percent + "%";
+};
+</script>
+
+</body>
+</html>
+
+
